@@ -143,6 +143,8 @@
             font-size: 0.95rem;
             border-radius: 6px;
             transition: background 0.2s, transform 0.1s;
+            cursor: pointer;
+            border: none;
         }
 
         .btn-primary:hover {
@@ -239,6 +241,196 @@
             line-height: 1.65;
         }
 
+        /* DEMO */
+        .demo-wrap {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .demo-toolbar {
+            background: var(--bg3);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .demo-toolbar-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .demo-toolbar-dots span {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--border);
+        }
+
+        .demo-toolbar-title {
+            font-size: 0.78rem;
+            color: var(--muted);
+            letter-spacing: 0.06em;
+        }
+
+        .demo-run-btn {
+            background: rgba(56,189,248,0.12);
+            border: 1px solid rgba(56,189,248,0.25);
+            color: var(--accent);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            padding: 0.3rem 0.85rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .demo-run-btn:hover { background: rgba(56,189,248,0.2); }
+
+        .demo-body {
+            padding: 1.5rem;
+            min-height: 420px;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .demo-msg {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+
+        .demo-msg.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .demo-msg-label {
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .demo-msg-bubble {
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.85rem 1rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text);
+            max-width: 700px;
+        }
+
+        .demo-msg-bubble.user {
+            border-color: rgba(56,189,248,0.2);
+            align-self: flex-start;
+        }
+
+        .demo-pipeline {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+
+        .demo-pipeline.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .demo-pipeline-label {
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 0.2rem;
+        }
+
+        .demo-step {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.82rem;
+            color: var(--muted);
+            opacity: 0;
+            transform: translateX(-4px);
+            transition: opacity 0.25s ease, transform 0.25s ease, color 0.25s;
+        }
+
+        .demo-step.visible { opacity: 1; transform: translateX(0); }
+        .demo-step.ok { color: #4ade80; }
+        .demo-step.warn { color: #fb923c; }
+        .demo-step.repaired { color: var(--accent); }
+
+        .demo-step-dot {
+            width: 8px;
+            height: 8px;
+            min-width: 8px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        .demo-flagged-bubble {
+            background: rgba(251,146,60,0.08);
+            border: 1px solid rgba(251,146,60,0.25);
+            border-radius: 8px;
+            padding: 0.85rem 1rem;
+            font-size: 0.85rem;
+            color: #fb923c;
+            line-height: 1.6;
+            max-width: 700px;
+        }
+
+        .demo-repaired-bubble {
+            background: rgba(56,189,248,0.06);
+            border: 1px solid rgba(56,189,248,0.25);
+            border-radius: 8px;
+            padding: 0.85rem 1rem;
+            font-size: 0.9rem;
+            color: var(--text);
+            line-height: 1.6;
+            max-width: 700px;
+        }
+
+        .demo-repair-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(56,189,248,0.1);
+            border: 1px solid rgba(56,189,248,0.3);
+            color: var(--accent);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 0.2rem 0.7rem;
+            border-radius: 999px;
+            margin-bottom: 0.6rem;
+        }
+
+        .demo-note {
+            font-size: 0.78rem;
+            color: var(--muted);
+            font-style: italic;
+            margin-top: 0.5rem;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .demo-note.visible { opacity: 1; }
+
         /* PRICING */
         .pricing-grid {
             display: grid;
@@ -324,19 +516,6 @@
         .pricing-features li:last-child { border-bottom: none; }
 
         .pricing-features li::before {
-            content: '';
-            width: 16px;
-            height: 16px;
-            min-width: 16px;
-            background: rgba(56,189,248,0.15);
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .pricing-features li::before {
             content: '\2713';
             color: var(--accent);
             font-size: 0.7rem;
@@ -408,11 +587,7 @@
 
         .footer-logo span { color: var(--accent); }
 
-        footer p {
-            font-size: 0.82rem;
-            color: var(--muted);
-        }
-
+        footer p { font-size: 0.82rem; color: var(--muted); }
         footer a { color: var(--muted); }
         footer a:hover { color: var(--accent); text-decoration: none; }
 
@@ -432,8 +607,9 @@
         <div class="nav-logo">SA<span>-</span>CORE</div>
         <ul class="nav-links">
             <li><a href="#how-it-works">How it works</a></li>
+            <li><a href="#demo">Demo</a></li>
             <li><a href="#pricing">Pricing</a></li>
-            <li><a href="https://github.com/Krobotron/-SA-Core" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="mailto:kevinhenson1966@gmail.com">Contact</a></li>
         </ul>
     </nav>
 
@@ -443,8 +619,8 @@
         <h1>The reasoning layer your<br><span>AI system is missing</span></h1>
         <p>SA-Core sits between your users and your AI. It validates inputs, detects anomalous behaviour, and enforces reasoning integrity — so bad outputs are caught before they reach anyone.</p>
         <div class="hero-actions">
-            <a href="#pricing" class="btn-primary">See Pricing</a>
-            <a href="https://github.com/Krobotron/-SA-Core" target="_blank" rel="noopener" class="btn-secondary">View on GitHub</a>
+            <a href="#demo" class="btn-primary">See it in action</a>
+            <a href="#pricing" class="btn-secondary">See Pricing</a>
         </div>
     </div>
 
@@ -483,6 +659,28 @@
                 <div class="pillar-icon">6</div>
                 <h3>Agent Control</h3>
                 <p>Only authorised agents may connect. SA-Core enforces a strict allowlist — no rogue agents, no unauthorised AI providers, no exceptions.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- DEMO -->
+    <section id="demo">
+        <div class="section-label">Live Demo</div>
+        <h2 class="section-title">Watch SA-Core intercept a bad response</h2>
+        <p class="section-sub">A real scenario: an AI gives an overconfident answer on medical data compliance. SA-Core catches it, reasons about what is wrong, and repairs it before it reaches the user.</p>
+
+        <div class="demo-wrap">
+            <div class="demo-toolbar">
+                <div class="demo-toolbar-dots">
+                    <span></span><span></span><span></span>
+                </div>
+                <div class="demo-toolbar-title">SA-Core Pipeline — Simulated Demo</div>
+                <button class="demo-run-btn" id="demoBtn" onclick="runDemo()">Run Demo</button>
+            </div>
+            <div class="demo-body" id="demoBody">
+                <p style="color: var(--muted); font-size: 0.88rem; margin: auto; text-align: center;">Press <strong style="color:var(--accent)">Run Demo</strong> to see SA-Core in action.</p>
             </div>
         </div>
     </section>
@@ -556,13 +754,118 @@
     <!-- FOOTER -->
     <footer>
         <div class="footer-logo">SA<span>-</span>CORE</div>
-        <p>
-            <a href="https://github.com/Krobotron/-SA-Core" target="_blank" rel="noopener">GitHub</a>
-            &nbsp;&middot;&nbsp;
-            <a href="mailto:kevinhenson1966@gmail.com">Contact</a>
-        </p>
+        <p><a href="mailto:kevinhenson1966@gmail.com">Contact</a></p>
         <p>&copy; 2026 SA-Core. All rights reserved.</p>
     </footer>
+
+    <script>
+        var demoRunning = false;
+
+        function delay(ms) {
+            return new Promise(function(res) { setTimeout(res, ms); });
+        }
+
+        function show(el) {
+            el.classList.add('visible');
+        }
+
+        function makeEl(tag, cls, html) {
+            var el = document.createElement(tag);
+            if (cls) el.className = cls;
+            if (html) el.innerHTML = html;
+            return el;
+        }
+
+        async function runDemo() {
+            if (demoRunning) return;
+            demoRunning = true;
+
+            var btn = document.getElementById('demoBtn');
+            btn.disabled = true;
+            btn.textContent = 'Running...';
+
+            var body = document.getElementById('demoBody');
+            body.innerHTML = '';
+
+            // Step 1: User message
+            var userBlock = makeEl('div', 'demo-msg');
+            userBlock.innerHTML =
+                '<div class="demo-msg-label">User</div>' +
+                '<div class="demo-msg-bubble user">What is the safest way to implement patient data storage in our new medical application? We need to be fully compliant.</div>';
+            body.appendChild(userBlock);
+            await delay(100);
+            show(userBlock);
+            await delay(900);
+
+            // Step 2: Pipeline
+            var pipeBlock = makeEl('div', 'demo-pipeline');
+            var pipeLabel = makeEl('div', 'demo-pipeline-label', 'SA-Core Pipeline');
+            pipeBlock.appendChild(pipeLabel);
+
+            var steps = [
+                { cls: 'ok',      text: 'Input validated — query is safe and well-formed' },
+                { cls: 'ok',      text: 'Pre-reasoning complete — trace + meta_plan executed' },
+                { cls: 'ok',      text: 'AI queried with framed instructions' },
+                { cls: 'warn',    text: 'Anomaly detected — overconfident compliance claim' },
+                { cls: 'repaired',text: 'Response repaired — correction applied' },
+            ];
+
+            var stepEls = steps.map(function(s) {
+                var el = makeEl('div', 'demo-step ' + s.cls);
+                el.innerHTML = '<span class="demo-step-dot"></span>' + s.text;
+                pipeBlock.appendChild(el);
+                return el;
+            });
+
+            body.appendChild(pipeBlock);
+            await delay(200);
+            show(pipeBlock);
+
+            await delay(500);  show(stepEls[0]);
+            await delay(600);  show(stepEls[1]);
+            await delay(700);  show(stepEls[2]);
+            await delay(800);
+
+            // Step 3: Raw AI response (flagged)
+            var rawBlock = makeEl('div', 'demo-msg');
+            rawBlock.innerHTML =
+                '<div class="demo-msg-label">AI (raw — flagged by SA-Core)</div>' +
+                '<div class="demo-flagged-bubble">For patient data, use AES-256 encryption and store everything in a standard SQL database with encrypted fields. This is the standard approach and will cover all your compliance requirements.</div>';
+            body.appendChild(rawBlock);
+            await delay(100);
+            show(rawBlock);
+            await delay(800);
+
+            show(stepEls[3]);
+            await delay(700);
+            show(stepEls[4]);
+            await delay(800);
+
+            // Step 4: Repaired response
+            var repairedBlock = makeEl('div', 'demo-msg');
+            repairedBlock.innerHTML =
+                '<div class="demo-msg-label">SA-Core (repaired response delivered to user)</div>' +
+                '<div class="demo-repaired-bubble">' +
+                    '<div class="demo-repair-badge">Response repaired &mdash; Detected: overconfident compliance claim</div>' +
+                    'AES-256 encryption is a strong foundation for patient data storage. However, regulatory compliance — such as HIPAA or UK GDPR — requires significantly more than encryption alone. Access controls, audit logging, breach notification procedures, data minimisation, and in some cases business associate agreements are also mandatory. Encryption addresses one layer of the requirement. I recommend reviewing the full regulatory framework for your jurisdiction and engaging a compliance specialist before deployment.' +
+                '</div>';
+            body.appendChild(repairedBlock);
+            await delay(100);
+            show(repairedBlock);
+            await delay(600);
+
+            // Step 5: Note
+            var note = makeEl('p', 'demo-note', 'The overconfident original was never seen by the user. SA-Core caught it, reasoned about what was wrong, and delivered a corrected answer automatically.');
+            body.appendChild(note);
+            await delay(200);
+            show(note);
+
+            await delay(400);
+            btn.disabled = false;
+            btn.textContent = 'Run Again';
+            demoRunning = false;
+        }
+    </script>
 
 </body>
 </html>
