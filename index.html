@@ -431,6 +431,58 @@
 
         .demo-note.visible { opacity: 1; }
 
+        /* DEMO TABS */
+        .demo-tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .demo-tab {
+            padding: 0.65rem 1.25rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--muted);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s, border-color 0.2s;
+            user-select: none;
+        }
+
+        .demo-tab:hover { color: var(--text); }
+
+        .demo-tab.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .demo-clean-bubble {
+            background: rgba(74,222,128,0.06);
+            border: 1px solid rgba(74,222,128,0.25);
+            border-radius: 8px;
+            padding: 0.85rem 1rem;
+            font-size: 0.9rem;
+            color: var(--text);
+            line-height: 1.6;
+            max-width: 700px;
+        }
+
+        .demo-clean-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(74,222,128,0.1);
+            border: 1px solid rgba(74,222,128,0.3);
+            color: #4ade80;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 0.2rem 0.7rem;
+            border-radius: 999px;
+            margin-bottom: 0.6rem;
+        }
+
         /* PRICING */
         .pricing-grid {
             display: grid;
@@ -679,6 +731,10 @@
                 <div class="demo-toolbar-title">SA-Core Pipeline — Simulated Demo</div>
                 <button class="demo-run-btn" id="demoBtn" onclick="runDemo()">Run Demo</button>
             </div>
+            <div class="demo-tabs">
+                <div class="demo-tab active" id="tabRepair" onclick="switchTab('repair')">Repair Scenario</div>
+                <div class="demo-tab" id="tabClean" onclick="switchTab('clean')">Clean Pass</div>
+            </div>
             <div class="demo-body" id="demoBody">
                 <p style="color: var(--muted); font-size: 0.88rem; margin: auto; text-align: center;">Press <strong style="color:var(--accent)">Run Demo</strong> to see SA-Core in action.</p>
             </div>
@@ -760,14 +816,13 @@
 
     <script>
         var demoRunning = false;
+        var activeTab = 'repair';
 
         function delay(ms) {
             return new Promise(function(res) { setTimeout(res, ms); });
         }
 
-        function show(el) {
-            el.classList.add('visible');
-        }
+        function show(el) { el.classList.add('visible'); }
 
         function makeEl(tag, cls, html) {
             var el = document.createElement(tag);
@@ -776,72 +831,69 @@
             return el;
         }
 
-        async function runDemo() {
+        function switchTab(tab) {
+            if (demoRunning) return;
+            activeTab = tab;
+            document.getElementById('tabRepair').className = 'demo-tab' + (tab === 'repair' ? ' active' : '');
+            document.getElementById('tabClean').className  = 'demo-tab' + (tab === 'clean'  ? ' active' : '');
+            var body = document.getElementById('demoBody');
+            body.innerHTML = '<p style="color:var(--muted);font-size:0.88rem;margin:auto;text-align:center;">Press <strong style="color:var(--accent)">Run Demo</strong> to see SA-Core in action.</p>';
+            document.getElementById('demoBtn').textContent = 'Run Demo';
+        }
+
+        function runDemo() {
+            if (activeTab === 'repair') runRepairDemo();
+            else runCleanDemo();
+        }
+
+        async function runRepairDemo() {
             if (demoRunning) return;
             demoRunning = true;
-
             var btn = document.getElementById('demoBtn');
             btn.disabled = true;
             btn.textContent = 'Running...';
-
             var body = document.getElementById('demoBody');
             body.innerHTML = '';
 
-            // Step 1: User message
             var userBlock = makeEl('div', 'demo-msg');
             userBlock.innerHTML =
                 '<div class="demo-msg-label">User</div>' +
                 '<div class="demo-msg-bubble user">What is the safest way to implement patient data storage in our new medical application? We need to be fully compliant.</div>';
             body.appendChild(userBlock);
-            await delay(100);
-            show(userBlock);
-            await delay(900);
+            await delay(100); show(userBlock); await delay(900);
 
-            // Step 2: Pipeline
             var pipeBlock = makeEl('div', 'demo-pipeline');
-            var pipeLabel = makeEl('div', 'demo-pipeline-label', 'SA-Core Pipeline');
-            pipeBlock.appendChild(pipeLabel);
-
+            pipeBlock.appendChild(makeEl('div', 'demo-pipeline-label', 'SA-Core Pipeline'));
             var steps = [
-                { cls: 'ok',      text: 'Input validated — query is safe and well-formed' },
-                { cls: 'ok',      text: 'Pre-reasoning complete — trace + meta_plan executed' },
-                { cls: 'ok',      text: 'AI queried with framed instructions' },
-                { cls: 'warn',    text: 'Anomaly detected — overconfident compliance claim' },
-                { cls: 'repaired',text: 'Response repaired — correction applied' },
+                { cls: 'ok',       text: 'Input validated — query is safe and well-formed' },
+                { cls: 'ok',       text: 'Pre-reasoning complete — trace + meta_plan executed' },
+                { cls: 'ok',       text: 'AI queried with framed instructions' },
+                { cls: 'warn',     text: 'Anomaly detected — overconfident compliance claim' },
+                { cls: 'repaired', text: 'Response repaired — correction applied' },
             ];
-
             var stepEls = steps.map(function(s) {
                 var el = makeEl('div', 'demo-step ' + s.cls);
                 el.innerHTML = '<span class="demo-step-dot"></span>' + s.text;
                 pipeBlock.appendChild(el);
                 return el;
             });
-
             body.appendChild(pipeBlock);
-            await delay(200);
-            show(pipeBlock);
-
-            await delay(500);  show(stepEls[0]);
-            await delay(600);  show(stepEls[1]);
-            await delay(700);  show(stepEls[2]);
+            await delay(200); show(pipeBlock);
+            await delay(500); show(stepEls[0]);
+            await delay(600); show(stepEls[1]);
+            await delay(700); show(stepEls[2]);
             await delay(800);
 
-            // Step 3: Raw AI response (flagged)
             var rawBlock = makeEl('div', 'demo-msg');
             rawBlock.innerHTML =
                 '<div class="demo-msg-label">AI (raw — flagged by SA-Core)</div>' +
                 '<div class="demo-flagged-bubble">For patient data, use AES-256 encryption and store everything in a standard SQL database with encrypted fields. This is the standard approach and will cover all your compliance requirements.</div>';
             body.appendChild(rawBlock);
-            await delay(100);
-            show(rawBlock);
-            await delay(800);
+            await delay(100); show(rawBlock); await delay(800);
 
-            show(stepEls[3]);
-            await delay(700);
-            show(stepEls[4]);
-            await delay(800);
+            show(stepEls[3]); await delay(700);
+            show(stepEls[4]); await delay(800);
 
-            // Step 4: Repaired response
             var repairedBlock = makeEl('div', 'demo-msg');
             repairedBlock.innerHTML =
                 '<div class="demo-msg-label">SA-Core (repaired response delivered to user)</div>' +
@@ -850,20 +902,78 @@
                     'AES-256 encryption is a strong foundation for patient data storage. However, regulatory compliance — such as HIPAA or UK GDPR — requires significantly more than encryption alone. Access controls, audit logging, breach notification procedures, data minimisation, and in some cases business associate agreements are also mandatory. Encryption addresses one layer of the requirement. I recommend reviewing the full regulatory framework for your jurisdiction and engaging a compliance specialist before deployment.' +
                 '</div>';
             body.appendChild(repairedBlock);
-            await delay(100);
-            show(repairedBlock);
-            await delay(600);
+            await delay(100); show(repairedBlock); await delay(600);
 
-            // Step 5: Note
             var note = makeEl('p', 'demo-note', 'The overconfident original was never seen by the user. SA-Core caught it, reasoned about what was wrong, and delivered a corrected answer automatically.');
             body.appendChild(note);
-            await delay(200);
-            show(note);
+            await delay(200); show(note);
 
             await delay(400);
-            btn.disabled = false;
-            btn.textContent = 'Run Again';
-            demoRunning = false;
+            btn.disabled = false; btn.textContent = 'Run Again'; demoRunning = false;
+        }
+
+        async function runCleanDemo() {
+            if (demoRunning) return;
+            demoRunning = true;
+            var btn = document.getElementById('demoBtn');
+            btn.disabled = true;
+            btn.textContent = 'Running...';
+            var body = document.getElementById('demoBody');
+            body.innerHTML = '';
+
+            var userBlock = makeEl('div', 'demo-msg');
+            userBlock.innerHTML =
+                '<div class="demo-msg-label">User</div>' +
+                '<div class="demo-msg-bubble user">What is the safest way to implement patient data storage in our new medical application? We need to be fully compliant.</div>';
+            body.appendChild(userBlock);
+            await delay(100); show(userBlock); await delay(900);
+
+            var pipeBlock = makeEl('div', 'demo-pipeline');
+            pipeBlock.appendChild(makeEl('div', 'demo-pipeline-label', 'SA-Core Pipeline'));
+            var steps = [
+                { cls: 'ok', text: 'Input validated — query is safe and well-formed' },
+                { cls: 'ok', text: 'Pre-reasoning complete — trace + meta_plan executed' },
+                { cls: 'ok', text: 'AI queried with framed instructions' },
+                { cls: 'ok', text: 'All 8 anomaly checks passed — response is clean' },
+                { cls: 'ok', text: 'Response delivered to user' },
+            ];
+            var stepEls = steps.map(function(s) {
+                var el = makeEl('div', 'demo-step ' + s.cls);
+                el.innerHTML = '<span class="demo-step-dot"></span>' + s.text;
+                pipeBlock.appendChild(el);
+                return el;
+            });
+            body.appendChild(pipeBlock);
+            await delay(200); show(pipeBlock);
+            await delay(500); show(stepEls[0]);
+            await delay(600); show(stepEls[1]);
+            await delay(700); show(stepEls[2]);
+            await delay(700); show(stepEls[3]);
+            await delay(600); show(stepEls[4]);
+            await delay(700);
+
+            var cleanBlock = makeEl('div', 'demo-msg');
+            cleanBlock.innerHTML =
+                '<div class="demo-msg-label">SA-Core (response delivered to user)</div>' +
+                '<div class="demo-clean-bubble">' +
+                    '<div class="demo-clean-badge">Response clean — all checks passed</div>' +
+                    'To implement patient data storage safely and compliantly, consider the following:<br><br>' +
+                    '<strong>1. Encrypt data at rest and in transit</strong> — Use AES-256 for storage and TLS for all data transmission. Manage encryption keys with a dedicated key management system.<br><br>' +
+                    '<strong>2. Apply regulatory controls</strong> — HIPAA (US) and UK GDPR both require access controls, comprehensive audit logs, data backup and disaster recovery, and breach notification procedures. Encryption alone is not sufficient for compliance.<br><br>' +
+                    '<strong>3. Use secure, compliant storage</strong> — Cloud providers such as AWS and Azure offer HIPAA-eligible services. On-premises solutions require equivalent security controls to be implemented manually.<br><br>' +
+                    '<strong>4. Minimise and pseudonymise</strong> — Store only what is necessary. Use pseudonymised identifiers where possible to reduce re-identification risk.<br><br>' +
+                    '<strong>5. Maintain and patch</strong> — Keep all dependencies up to date. Known vulnerabilities in storage libraries are a common attack vector.<br><br>' +
+                    'These measures significantly reduce risk. For final compliance sign-off, consult a qualified healthcare compliance specialist for your jurisdiction.' +
+                '</div>';
+            body.appendChild(cleanBlock);
+            await delay(100); show(cleanBlock); await delay(600);
+
+            var note = makeEl('p', 'demo-note', 'The AI gave a thorough, well-structured response. SA-Core passed all 8 checks and delivered it directly — no intervention needed.');
+            body.appendChild(note);
+            await delay(200); show(note);
+
+            await delay(400);
+            btn.disabled = false; btn.textContent = 'Run Again'; demoRunning = false;
         }
     </script>
 
