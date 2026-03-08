@@ -1,8 +1,4 @@
-
-
-
-      
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -665,7 +661,7 @@
             <li><a href="#how-it-works">How it works</a></li>
             <li><a href="#demo">Demo</a></li>
             <li><a href="#pricing">Pricing</a></li>
-            <li><a href="mailto:kevinhenson1966@gmail.com">Contact</a></li>
+            <li><a href="mailto:sacore.official@gmail.com">Contact</a></li>
         </ul>
     </nav>
 
@@ -733,14 +729,13 @@
                     <span></span><span></span><span></span>
                 </div>
                 <div class="demo-toolbar-title">SA-Core Pipeline — Simulated Demo</div>
-                <button class="demo-run-btn" id="demoBtn" onclick="runDemo()">Run Demo</button>
+                <button class="demo-run-btn" id="demoBtn" onclick="runDemo()">Replay</button>
             </div>
             <div class="demo-tabs">
                 <div class="demo-tab active" id="tabRepair" onclick="switchTab('repair')">Repair Scenario</div>
                 <div class="demo-tab" id="tabClean" onclick="switchTab('clean')">Clean Pass</div>
             </div>
             <div class="demo-body" id="demoBody">
-                <p style="color: var(--muted); font-size: 0.88rem; margin: auto; text-align: center;">Press <strong style="color:var(--accent)">Run Demo</strong> to see SA-Core in action.</p>
             </div>
         </div>
     </section>
@@ -750,63 +745,83 @@
     <!-- PRICING -->
     <section id="pricing">
         <div class="section-label">Pricing</div>
-        <h2 class="section-title">Simple annual licences</h2>
-        <p class="section-sub">One licence per deployment. No hidden fees. All tiers include the full SDK, all 23 capabilities, and all future updates within your licence year.</p>
+        <h2 class="section-title">Simple, transparent pricing</h2>
+        <p class="section-sub">Priced per licence, not per call. All paid tiers include the full SDK, all 24 capabilities, unlimited API calls, and all future updates. Annual plans save ~2 months.</p>
         <div class="pricing-grid">
+
+            <!-- Free Trial -->
+            <div class="pricing-card">
+                <div class="pricing-tier">Free Trial</div>
+                <div class="pricing-price"><sup>$</sup>0</div>
+                <div class="pricing-period">one-time &mdash; never renews</div>
+                <ul class="pricing-features">
+                    <li>1 licence</li>
+                    <li>1,000 API calls (no reset)</li>
+                    <li>Full SDK — all 24 capabilities</li>
+                    <li>Input validation pipeline</li>
+                    <li>Anomaly detection</li>
+                    <li>Audit logging</li>
+                </ul>
+                <a href="mailto:sacore.official@gmail.com?subject=SA-Core Free Trial" class="pricing-cta pricing-cta-secondary">Request Access</a>
+            </div>
 
             <!-- Developer -->
             <div class="pricing-card">
                 <div class="pricing-tier">Developer</div>
-                <div class="pricing-price"><sup>£</sup>79</div>
-                <div class="pricing-period">per year</div>
+                <div class="pricing-price"><sup>$</sup>49</div>
+                <div class="pricing-period">/ month &mdash; or $490 / year</div>
                 <ul class="pricing-features">
-                    <li>1,000 API calls / month</li>
-                    <li>Full SDK — all 23 capabilities</li>
+                    <li>1 licence</li>
+                    <li>Unlimited API calls</li>
+                    <li>Full SDK — all 24 capabilities</li>
                     <li>Input validation pipeline</li>
-                    <li>Anomaly detection</li>
+                    <li>Anomaly detection + repair</li>
                     <li>Audit logging</li>
                     <li>Email support</li>
                 </ul>
-                <a href="mailto:kevinhenson1966@gmail.com?subject=SA-Core Developer Licence" class="pricing-cta pricing-cta-secondary">Get Early Access</a>
+                <a href="mailto:sacore.official@gmail.com?subject=SA-Core Developer Plan" class="pricing-cta pricing-cta-secondary">Get Early Access</a>
             </div>
 
             <!-- Startup -->
             <div class="pricing-card featured">
                 <div class="pricing-badge">Most Popular</div>
                 <div class="pricing-tier">Startup</div>
-                <div class="pricing-price"><sup>£</sup>229</div>
-                <div class="pricing-period">per year</div>
+                <div class="pricing-price"><sup>$</sup>199</div>
+                <div class="pricing-period">/ month &mdash; or $1,990 / year</div>
                 <ul class="pricing-features">
-                    <li>10,000 API calls / month</li>
-                    <li>Full SDK — all 23 capabilities</li>
+                    <li>5 licences</li>
+                    <li>Unlimited API calls</li>
+                    <li>Full SDK — all 24 capabilities</li>
                     <li>Input validation pipeline</li>
                     <li>Anomaly detection + repair</li>
                     <li>Reasoning integrity engine</li>
                     <li>Audit logging</li>
                     <li>Priority support</li>
                 </ul>
-                <a href="mailto:kevinhenson1966@gmail.com?subject=SA-Core Startup Licence" class="pricing-cta pricing-cta-primary">Get Early Access</a>
+                <a href="mailto:sacore.official@gmail.com?subject=SA-Core Startup Plan" class="pricing-cta pricing-cta-primary">Get Early Access</a>
             </div>
 
             <!-- Enterprise -->
             <div class="pricing-card">
                 <div class="pricing-tier">Enterprise</div>
-                <div class="pricing-price"><sup>£</sup>749</div>
-                <div class="pricing-period">per year</div>
+                <div class="pricing-price"><sup>$</sup>599</div>
+                <div class="pricing-period">/ month &mdash; or $5,990 / year</div>
                 <ul class="pricing-features">
+                    <li>30 licences</li>
                     <li>Unlimited API calls</li>
-                    <li>Full SDK — all 23 capabilities</li>
-                    <li>Input validation pipeline</li>
+                    <li>Full SDK — all 24 capabilities</li>
                     <li>Anomaly detection + repair</li>
                     <li>Reasoning integrity engine</li>
                     <li>Agent allowlist control</li>
                     <li>Audit logging</li>
                     <li>Dedicated support</li>
+                    <li>Extra licence packs available</li>
                 </ul>
-                <a href="mailto:kevinhenson1966@gmail.com?subject=SA-Core Enterprise Licence" class="pricing-cta pricing-cta-secondary">Get Early Access</a>
+                <a href="mailto:sacore.official@gmail.com?subject=SA-Core Enterprise Plan" class="pricing-cta pricing-cta-secondary">Get Early Access</a>
             </div>
 
         </div>
+        <p style="text-align:center;color:var(--muted);font-size:0.82rem;margin-top:2rem;">Enterprise extra licence packs: 5 licences $99/mo &bull; 10 licences $180/mo (10% discount)</p>
     </section>
 
     <hr class="divider">
@@ -814,7 +829,7 @@
     <!-- FOOTER -->
     <footer>
         <div class="footer-logo">SA<span>-</span>CORE</div>
-        <p><a href="mailto:kevinhenson1966@gmail.com">Contact</a></p>
+        <p><a href="mailto:sacore.official@gmail.com">Contact</a></p>
         <p>&copy; 2026 SA-Core. All rights reserved.</p>
     </footer>
 
@@ -840,9 +855,7 @@
             activeTab = tab;
             document.getElementById('tabRepair').className = 'demo-tab' + (tab === 'repair' ? ' active' : '');
             document.getElementById('tabClean').className  = 'demo-tab' + (tab === 'clean'  ? ' active' : '');
-            var body = document.getElementById('demoBody');
-            body.innerHTML = '<p style="color:var(--muted);font-size:0.88rem;margin:auto;text-align:center;">Press <strong style="color:var(--accent)">Run Demo</strong> to see SA-Core in action.</p>';
-            document.getElementById('demoBtn').textContent = 'Run Demo';
+            runDemo();
         }
 
         function runDemo() {
@@ -913,7 +926,7 @@
             await delay(200); show(note);
 
             await delay(400);
-            btn.disabled = false; btn.textContent = 'Run Again'; demoRunning = false;
+            btn.disabled = false; btn.textContent = 'Replay'; demoRunning = false;
         }
 
         async function runCleanDemo() {
@@ -977,8 +990,11 @@
             await delay(200); show(note);
 
             await delay(400);
-            btn.disabled = false; btn.textContent = 'Run Again'; demoRunning = false;
+            btn.disabled = false; btn.textContent = 'Replay'; demoRunning = false;
         }
+
+        // Auto-run on page load
+        window.addEventListener('load', function() { runDemo(); });
     </script>
 
 </body>
